@@ -1,0 +1,52 @@
+C-g quit
+C-x C-c exit
+C-x C-f open/visit a file
+C-x C-s save a file
+C-x k kill the buffer representing a file
+
+C-f move forward one character
+C-b move backward one character
+
+M-f move forward one word
+M-b move backward one word
+
+C-d delete a charater
+M-d delete a word
+C-_ " (C- + Shift key + -") Undo
+
+
+C-p previous line
+C-n next line
+C-a move to the begining of the line
+C-e move to the end of the line
+
+M-< (C- + Shift key + ,) Begining of the buffer
+M-> (C- + Shift key + .) End of the buffer
+
+C-v page down
+M-v page up
+C-l center the screen
+
+C-x 2 split top to bottom
+C-x o jump between two views
+C-x 3 split left to right view
+C-x 1 remove all views simply life
+
+Search
+C-s text  <-----  search case insensitive
+C-s Text <------search case sensitive
+C-g to exit search
+
+Cut and Pasteque
+C-space <----start/toggle marking a region
+M-w is copy
+C-w is cut
+C-y yank/paste
+C-k kill to end of line
+M-y yank the previous copies
+
+Replace
+M-x --> then type "query-replace" then type old value then type new value, type "y" to replace; "n" not to
+M-% (M- + Shift Key + 5) direct query replace
+M-$ (M- + Shift Key + 4) spelling check
+M-x flyspell-mode
