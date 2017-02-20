@@ -1,3 +1,4 @@
+
 In mac meta key is option key
 C-x 2 <--- split
 C-x b <--- switch to a different buffer in a windo
@@ -10,5 +11,5 @@ g <--- update/refresh to see newly added files
 M-% <--- M-x query-replace
 M-x replace-string
 M-u <--- UPPERCASE
-M-l <--- lowercaSE
+M-l <--- lowercase
 M-$ <--- Spell chekc word
