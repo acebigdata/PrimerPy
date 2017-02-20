@@ -1,7 +1,0 @@
-C-x 2 <--- split
-C-x b <--- switch to a different buffer in a windo
-C-x o <--- jump to another buffer
-M-x shell <--- Open a terminal
-+ <--- to create a directory+
-d <--- mark file/folders to delete
-x <--- execute delete

@@ -1,3 +1,0 @@
-+ (shift and + key) make a new dir
-d mark a file for deletion
-x execute the action (e.g. delete)
