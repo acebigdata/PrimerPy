@@ -2,6 +2,46 @@ In Ubuntu
 C- control key
 M- alt key
 
+//Some initialization function keys
 C-g quit
 C-x C-c exit
+C-x C-f "visit" a file
+C-x k kill the buffer representing a file ... not deleting a file
 
+//Movement keys
+C-f move forward 1 character
+C-b move backward 1 character
+M-f move forward 1 word
+M-b move backward 1 word
+
+C-d delete a character 
+M-d delete a word
+C-_ (Control Shift underscore) undo
+C-p previous line (same as up key)
+C-n next line (same as down key)
+C-a to the beginning of the line
+C-e to the end of the line
+
+M-< beginning of the buffer
+M-> end of the buffer
+C-v page down
+M-v page up
+
+C-x-2 Split top and bottom
+C-x-o switch between windows
+C-x-3 split left and right
+C-x-1 remove the screen split
+C-l recenter cursor in the middle of the screen
+C-s text <---seach case insensitive
+C-S text <---seach case sensitive
+
+//Cut and Paste
+C-space bar <---start/toggle marking a region
+M-w <---copy
+C-y <---paste/yank
+C-w <---cut
+C-k <-- kill to end of line
+M-x query-replace <--- replace
+M-% <--- same as M-x query-replace
+M-$ <--- spelling check
+M-x flyspell-mode <---enable fly spell

@@ -1,0 +1,86 @@
+#+STARTUP: showall
+
+
+* Headline
+
+* Installing
+
+* Set up .emacs file
+
+** add text to file
+
+** restart emacs
+   
+*** a third level
+
+* expand and collapse org mode tree
+
+<TAB> <--- collapse/expand
+
+Shift+<TAB> <--- global collapse/expand
+
+* Add text
+
+Hello world.
+
+Formatting basics *bold* or /italic/ or _underline_, and =code samples=, ~verbatim~
+
+C-c C-e <---export the file
+# This is a comment
+** COMMENT do not export if you have this tag
+will not go to html
+
+
+* Lists
+
+- an entry
+- another entry
+  - sublist entry
+  - another sub entry
+
+- [ ] This is a todo item
+- [X] Change the state of todo with C-c C-c
+- [X] Finished task has a capital X. Do not use a 'x' 
+
+* TODO creating todo and done items
+* DONE 
+after * and space key, shift-RightArrow
+ 
+* Date and time. No time zone support
+
+C-c . <--- insert a timestamp with date
+
+<2017-02-26 Sun>
+Shift-UpArrow or Shift-DownArrow change by +/- 1
+
+C-u C-c . <--- insert a timestamp with time 
+<2017-02-26 Sun 21:35>
+
+* Links
+- http://isaaczhou.com
+- [[http://isaaczhou.com][Isaac Zhou's Blog]]
+
+* Tagging entry C-c C-c					     :learning:emacs:
+
+* Org mode							   :org:mode:
+
+* 3rd tagged entry						 :emacs:mode:
+
+* Building table
+| Col 1 | Col 2 |
+|-------+-------|
+|   123 |   234 |
+|   123 |   232 |
+|    23 |   123 |
+|   123 |   123 |
+
+* Source code
+#+BEGIN_SRC python
+return("Hello World!") # C-c C-c 
+#+END_SRC
+
+#+RESULTS:
+: Hello World!
+
+* Feb 26 in New York <2017-02-26 Sun 21:56>
+** Taking notes for Emacs

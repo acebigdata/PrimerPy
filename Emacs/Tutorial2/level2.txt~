@@ -1,0 +1,5 @@
++ (Shift + sign) <--- create a folder
+C-x-2 <--- split the windows
+C-x-o <--- switch windows
+C-x-b <--- switch to a different buffer in a window
+M-x-shell <--- open a terminal

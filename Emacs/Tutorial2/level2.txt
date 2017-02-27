@@ -1,0 +1,19 @@
++ (Shift + sign) <--- create a folder
+C-x-2 <--- split the windows
+C-x-o <--- switch windows
+C-x-b <--- switch to a different buffer in a window
+M-x-shell <--- open a terminal
+M-x replace-string
+M-u <--- upper case
+UPPER CASE
+M-l <--- lower case
+lower case
+M-c <--- capitalized
+Capitalize
+C-space <--- start to marking a region
+M-x ispell-region <--- check a small region
+M-x ispell-buffer <--- check the entire buffer
+
+//erc
+//sudo apt-get install erc
+M-x erc <--- start irc inside of emacs
