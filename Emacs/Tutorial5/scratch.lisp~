@@ -1,0 +1,3 @@
+(defun fun(args)
+  (interactive "P")
+  )

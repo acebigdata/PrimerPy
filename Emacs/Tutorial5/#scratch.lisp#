@@ -1,0 +1,7 @@
+(defun my/insert-line-before()
+  "Insert a newline(s) above the line containing the cursor."
+  (interactive)
+  (move-beginning-of-line 1)
+  )
+
+
