@@ -1,0 +1,22 @@
+* Notes for Modularity<2017-03-04 Sat>
+  - [X] Special attributes in Python are delimited by double underscores.
+  - [X] __name__ evaluates to "__main__" or the actual name depending on how the enclosing module is being used
+  - [X] main functions and command line argument
+  - [X] shebang, put #!/path python version at the beginning of the program
+  - [X] Use __name__ to determine how the module is being used
+  - [X] if __name__ = '__main__' the module is being executed
+  - [X] Command line argument are accessible through sys.argv
+  - [X] The script filename is in sys.argv[0]
+
+* Objects
+  - [X] Value: equivalent "conetens" can be controlled programatically
+    - [X] Identity: same object cannot be controlled programatically
+
+* Classes
+  - [X] Classes define the structure and behavior of objects
+  - [X] An object's class controls its initialization
+  - [X] Classes make complex problems tractable
+  - [X] Classes can make simple solutions overply complex
+
+** Instance Methods
+  - [ ] 
