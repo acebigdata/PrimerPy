@@ -1450,3 +1450,361 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> type(f)
 <class 'airtravel.Flight'>
 >>> 
+isaac~/PrimerPy/Pluralsight-> cd ..
+isaac~/PrimerPy-> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Pluralsight/
+
+nothing added to commit but untracked files present (use "git add" to track)
+isaac~/PrimerPy-> git add .
+isaac~/PrimerPy-> git commit -m "Add Pluralsight"
+[master d1dcf23] Add Pluralsight
+ 15 files changed, 2798 insertions(+)
+ create mode 100644 Pluralsight/#*shell*#
+ create mode 100644 Pluralsight/#modularity.py#
+ create mode 100644 Pluralsight/*shell*
+ create mode 100644 Pluralsight/*shell*~
+ create mode 120000 Pluralsight/.#*shell*
+ create mode 120000 Pluralsight/.#modularity.py
+ create mode 100644 Pluralsight/__pycache__/airtravel.cpython-35.pyc
+ create mode 100644 Pluralsight/__pycache__/modularity.cpython-35.pyc
+ create mode 100644 Pluralsight/airtravel.py
+ create mode 100644 Pluralsight/airtravel.py~
+ create mode 100644 Pluralsight/modularity.org
+ create mode 100644 Pluralsight/modularity.org~
+ create mode 100644 Pluralsight/modularity.py
+ create mode 100644 Pluralsight/modularity.py~
+ create mode 100644 Pluralsight/object.py
+isaac~/PrimerPy-> git push -u origin master
+Counting objects: 15, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (15/15), 6.81 KiB | 0 bytes/s, done.
+Total 15 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), completed with 1 local objects.        
+To https://github.com/acebigdata/PrimerPy.git
+   14ab174..d1dcf23  master -> master
+Branch master set up to track remote branch master from origin.
+isaac~/PrimerPy-> git pull
+Already up-to-date.
+isaac~/PrimerPy-> cd ..
+isaac~-> cd OrgEmacs/
+isaac~/OrgEmacs-> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   admin.org
+
+no changes added to commit (use "git add" and/or "git commit -a")
+isaac~/OrgEmacs-> git add .
+isaac~/OrgEmacs-> git commit -m "Update admin"
+[master 21a0b51] Update admin
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+isaac~/OrgEmacs-> git push -u origin master
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 474 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.        
+To https://github.com/acebigdata/OrgEmacs.git
+   3a554d2..21a0b51  master -> master
+Branch master set up to track remote branch master from origin.
+isaac~/OrgEmacs-> git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working directory clean
+isaac~/OrgEmacs-> git pull
+Already up-to-date.
+isaac~/OrgEmacs-> cd ../PrimerPy/
+isaac~/PrimerPy-> cd Pluralsight/
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import Flight
+>>> f = Fligth()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'Fligth' is not defined
+>>> f = Flight()
+>>> f.number()
+'DL400'>>> 
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import Flight
+>>> f = Flight()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: __init__() missing 1 required positional argument: 'number'
+>>> f = Flight("SN060")
+>>> f.number()
+'SN060'
+>>> from airtravel import Flight
+>>> f = Flight("SN6078")
+>>> f.number()
+'SN6078'
+>>> f_2 = Flight("6078")
+>>> f_2.number()
+'6078'>>> 
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import Flight
+>>> f = Flight("SN6078")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 14, in __init__
+    if not (number[2:].isdigit() and int(number[2:]<9999)):
+TypeError: unorderable types: str() < int()
+>>> from airtravel import Flight
+>>> f = Flight("SN6078")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 14, in __init__
+    if not (number[2:].isdigit() and int(number[2:])<9999)):
+TypeError: unorderable types: str() < int()
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import Flight
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 14
+    if not (number[2:].isdigit() and int(number[2:])<9999)):
+                                                          ^
+SyntaxError: invalid syntax
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import Flight
+>>> f = Flight("SN7890")
+>>> f.number()
+'SN7890'
+>>> f = Flight("7890")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 9, in __init__
+    raise ValueError("No airline code in {a_ref}".format(a_ref = number))
+ValueError: No airline code in 7890
+>>> f = Flight("sn7890")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 12, in __init__
+    raise ValueError("Invalid airline code {a_ref}".format(a_ref = number))
+ValueError: Invalid airline code sn7890
+>>> f = Flight("SN7899")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 15, in __init__
+    raise ValueError("Invalid route number {a_ref}".format(a_ref = number))
+ValueError: Invalid route number SN78909
+>>> f = Flight("SN7899")
+>>> f.number()
+'SN7899'
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> "ABCDEFGHJK"[:5]
+'ABC'
+>>> "ABCDEFGHJK"[:5]
+'ABCDE'
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import *
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 7
+    """Initialization"""
+                       ^
+IndentationError: expected an indented block
+>>> from airtravel import *
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 21
+    """Return the airline number"""
+                                  ^
+IndentationError: expected an indented block
+>>> from airtravel import *
+>>> a = Aircraft("G-EUPT", "Airbus A319", num_rows = 22, num_seats_per_row = 6)
+>>> a
+<airtravel.Aircraft object at 0x7f6dbcb1f278>
+>>> a.model()'Airbus A319'
+>>> a.seating_plan()
+(range(1, 23), 'ABCDEF')
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import *
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import *
+>>> f = Flight("BA758", Aircraft("G-EUPT", "Airbus A319", num_rows = 22, num_seats_per_row = 6))
+>>> f.aircraft_model()
+'Airbus A319'
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import *
+>>> f = Flight()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: __init__() missing 2 required positional arguments: 'number' and 'aircraft'
+>>> f = Flight("BA758", Aircraft("G-EUPT", "Airbus A319", num_rows = 22, num_seats_per_row = 6))
+>>> f._seating
+[None, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}, {'C': None, 'B': None, 'F': None, 'D': None, 'E': None, 'A': None}]
+>>> from pprint import pprint as pp
+>>> pp(f._seating)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'list' object is not callable
+>>> pp(f._seating)
+[None,
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': one},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None}]
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from airtravel import *
+>>> f = Flight("BA758", Aircraft("G-EUPT", "Airbus A319", num_rows = 22, num_seats_per_row = 6))
+>>> f.allocat_seat('12A', 'John Johnson')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: allocat_seat() takes 2 positional arguments but 3 were given
+>>> 
+isaac~/PrimerPy/Pluralsight-> python
+Python 3.5.2 |Anaconda custom (64-bit)| (default, Jul  2 2016, 17:53:06) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> f = Flight("BA758", Aircraft("G-EUPT", "Airbus A319", num_rows = 22, num_seats_per_row = 6))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'Flight' is not defined
+>>> from airtravel import *
+>>> f = Flight("BA758", Aircraft("G-EUPT", "Airbus A319", num_rows = 22, num_seats_per_row = 6))
+>>> f.allocate_seat
+<bound method Flight.allocate_seat of <airtravel.Flight object at 0x7f71631ba630>>
+>>> f.allocate_seat('12A', 'John Johnson')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Flight' object has no attribute 'allocat_seat'
+>>> f.allocate_seat('12A', 'John Johnson')
+>>> f.allocate_seat('12A', 'Joe Smith')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 58, in allocate_seat
+    raise ValueError("Seat {a_ref} already occupied".format(a_ref = seat))
+ValueError: Seat 12A already occupied
+>>> f.allocate_seat('15E', 'Anders Helberg')
+>>> f.allocate_seat('27E', 'Yukihiro Matsumoto')
+>>> f.allocate_seat('1C', 'John McCarthy')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 56, in allocate_seat
+    raise ValueError("Invalid row number {a_ref}".format(a_ref = row))
+ValueError: Invalid row number 27
+>>> f.allocate_seat('1D', 'Richard Hickey')
+>>> f.allocate_seat('DD', 'Larry Wall')
+>>> f.allocate_seat('DD', 'Larry Wall')
+Traceback (most recent call last):
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 51, in allocate_seat
+    row = int(row_text)
+ValueError: invalid literal for int() with base 10: 'D'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/isaac/PrimerPy/Pluralsight/airtravel.py", line 53, in allocate_seat
+    raise ValueError("Invalid seat row {a_ref}".format(a_ref = row))
+UnboundLocalError: local variable 'row' referenced before assignment
+>>> pp(f._seating)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'pp' is not defined
+>>> from pprint import pprint as pp
+>>> pp(f._seating)
+[None,
+ {'A': None,
+  'B': None,
+  'C': 'John McCarthy',
+  'D': 'Richard Hickey',
+  'E': None,
+  'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': 'John Johnson', 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None,
+  'B': None,
+  'C': None,
+  'D': None,
+  'E': 'Anders Helberg',
+  'F': 'Bjarne Stroustrup'},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None},
+ {'A': None, 'B': None, 'C': None, 'D': None, 'E': None, 'F': None}]
+>>> 

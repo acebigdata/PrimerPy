@@ -19,4 +19,21 @@
   - [X] Classes can make simple solutions overply complex
 
 ** Instance Methods
-  - [ ] 
+  - [ ] Method: a function defined within a class
+  - [ ] Instance methods: functions which can be called on objects
+  - [ ] self: the first argument to all instance methods
+
+** Initializer
+  - [ ] __init__(): instance method for initilizing new objects
+  - [ ] why _number?
+    - [ ] Avoid name clash with number()
+    - [ ] By convention, implementation details start with underscore_
+  - [ ] Class
+
+** Collaborating Classes
+  - [ ] Law of Demeter
+    - [ ] The principle of least knowledge
+    - [ ] Only talk to your friends
+
+** Example: Booking Seats
+  - [ ] from pprint import pprint as pp
