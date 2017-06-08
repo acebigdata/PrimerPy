@@ -1,0 +1,24 @@
+#+SETUPFILE: /home/isaac/Share/Dropbox/PrimerPy/website/themes/theme-readtheorg.setup
+#+TITLE: My Setup: VirtualBox, Linux and Emacs
+#+AUTHOR: Isaac Zhou
+#+OPTIONS: num:nil :with-author
+* System Setup
+** VirtualBox
+I chose to use VirtualBox as I have to do some work in Excel and code in VBA. VirtualBox's seamless mode is a game changer. Here's how to set it up
+*** Download VirtualBox
+- Download VirtualBox from their [[https://www.virtualbox.org/wiki/Downloads][official site]]
+*** Download Xubuntu
+*** Configuration
+** Linux
+As mentioned, I only kept Windows for my daily consulting work. Most people from the corporate world are still heavily relying on Windows and MS Office. I use Windows only to code in Excel VBA or create decks in PowerPoint (Though wish I could figure how to make beautiful slides with Emacs and LaTex)
+*** Xubuntu
+- Ubuntu is taking too much resources with the unity desktop
+- Xubuntu is an extremely stable and efficient version of Ubuntu using xfce desktop. Simple and Reliable
+*** Manjaro (Arch)
+** Emacs
+Maybe the best thing ever invented (and not just for computer science)! Here are a list of my Emacs settings:
+*** Layout
+*** Python IDE
+*** Org Mode
+*** Babel
+*** Honorable Mention: Literate Programming

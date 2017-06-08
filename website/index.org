@@ -1,0 +1,14 @@
+#+SETUPFILE: /home/isaac/Share/Dropbox/PrimerPy/website/themes/theme-readtheorg.setup
+#+TITLE: PrimerPy: Python and R Fundamentals for Data Science
+#+AUTHOR: Isaac Zhou
+#+OPTIONS: num:nil timestamp:nil
+* [[file:system-setup.org][System Setup]]
+* Python
+** Python Coding
+** Numpy
+** [[file:~/Share/Dropbox/Pandas/pandas.org][Pandas]]
+** Bokeh
+** Matplotlib
+** Seaborn
+** Plotly
+* [[file:~/Share/Dropbox/R/R.org][R]]

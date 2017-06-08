@@ -1,0 +1,600 @@
+#+TITLE: PrimerPy
+#+OPTIONS: timestamp:nil author:nil
+* PrimerPy
+** A website sharing how to learn Python
+* Structure of PrimerPy
+** Basic Python
+** Numpy
+** Pandas
+** Bokeh
+* Topics
+** Pandas
+* Data Analysis with Pandas
+***** Multi-Index
+****** Multi-Index intro
+#+BEGIN_SRC python :results output :exports both
+import pandas as pd
+file1="/home/isaac/Dropbox/PrimerPy/Pandas/bigmac.csv"
+df=pd.read_csv(file1, parse_dates=["Date"])
+print(df.info())
+#+END_SRC
+
+#+RESULTS:
+: <class 'pandas.core.frame.DataFrame'>
+: RangeIndex: 652 entries, 0 to 651
+: Data columns (total 3 columns):
+: Date                   652 non-null datetime64[ns]
+: Country                652 non-null object
+: Price in US Dollars    652 non-null float64
+: dtypes: datetime64[ns](1), float64(1), object(1)
+: memory usage: 15.4+ KB
+: None
+****** Create a MultIndex with .set_index() Method
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1="/home/isaac/Dropbox/PrimerPy/Pandas/bigmac.csv"
+df=pd.read_csv(file1, parse_dates=["Date"])
+df.set_index(keys=["Date", "Country"], inplace=True)
+df.sort_index(inplace=True)
+print(df.head(),"\n")
+print(df.index.names,"\n")
+print(df.index[0])
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+                      Price in US Dollars
+Date       Country                       
+2010-01-01 Argentina                 1.84
+           Australia                 3.98
+           Brazil                    4.76
+           Britain                   3.67
+           Canada                    3.97 
+
+['Date', 'Country'] 
+
+(Timestamp('2010-01-01 00:00:00'), 'Argentina')
+#+end_example
+****** .get_level_values() Method
+- set multi-index directly from pd.read_csv
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1="/home/isaac/Dropbox/PrimerPy/Pandas/bigmac.csv"
+df=pd.read_csv(file1, parse_dates=["Date"], index_col=["Date", "Country"])
+df.sort_index(inplace=True)
+print(df.head(3))
+print(df.index.get_level_values("Country").unique().tolist())
+#+END_SRC
+
+#+RESULTS:
+:                       Price in US Dollars
+: Date       Country                       
+: 2010-01-01 Argentina                 1.84
+:            Australia                 3.98
+:            Brazil                    4.76
+: ['Argentina', 'Australia', 'Brazil', 'Britain', 'Canada', 'Chile', 'China', 'Colombia', 'Costa Rica', 'Czech Republic', 'Denmark', 'Egypt', 'Euro area', 'Hong Kong', 'Hungary', 'Indonesia', 'Israel', 'Japan', 'Latvia', 'Lithuania', 'Malaysia', 'Mexico', 'New Zealand', 'Norway', 'Pakistan', 'Peru', 'Philippines', 'Poland', 'Russia', 'Saudi Arabia', 'Singapore', 'South Africa', 'South Korea', 'Sri Lanka', 'Sweden', 'Switzerland', 'Taiwan', 'Thailand', 'Turkey', 'UAE', 'Ukraine', 'United States', 'Uruguay', 'Austria', 'Belgium', 'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'India', 'Ireland', 'Italy', 'Netherlands', 'Portugal', 'Spain', 'Venezuela', 'Vietnam']
+****** .set_names() method
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1="/home/isaac/Dropbox/PrimerPy/Pandas/bigmac.csv"
+df=pd.read_csv(file1, parse_dates=["Date"], index_col=["Date", "Country"])
+df.sort_index(inplace=True)
+df.index.set_names(["Day","Location"], inplace=True)
+print(df.head())
+#+END_SRC
+
+#+RESULTS:
+:                       Price in US Dollars
+: Day        Location                      
+: 2010-01-01 Argentina                 1.84
+:            Australia                 3.98
+:            Brazil                    4.76
+:            Britain                   3.67
+:            Canada                    3.97
+****** .sort_index() method
+
+***** Merging, Joining and Concatenating
+****** concatenate: pd.concat()
+- combine two simple objects
+- take a list of objects
+- Index of all objects will be kept in default
+
+#+BEGIN_SRC python :results output
+# Data Prep
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+#print(week1.head())
+#print(week2.head())
+#print(customers.head())
+#print(foods.head())
+
+#Cat tables, keep old index
+week_con = pd.concat([week1, week2])
+print(week_con.head())
+print(len(week1), len(week2), len(week_con))
+print(week1.index,week2.index)
+print(week_con.index)
+print("\n")
+#Cat tables, ignore old index
+week_con_ig = pd.concat([week1, week2], ignore_index=True)
+print(week_con_ig.index)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID
+0          537        9
+1           97        4
+2          658        1
+3          202        2
+4          155        9
+250 250 500
+RangeIndex(start=0, stop=250, step=1) RangeIndex(start=0, stop=250, step=1)
+Int64Index([  0,   1,   2,   3,   4,   5,   6,   7,   8,   9,
+            ...
+            240, 241, 242, 243, 244, 245, 246, 247, 248, 249],
+           dtype='int64', length=500)
+
+
+RangeIndex(start=0, stop=500, step=1)
+#+end_example
+****** more advanced concatenate
+- add key parameter
+- use .ix[(key), "item id"]
+
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+
+week_con = pd.concat([week1, week2], keys=["Week 1", "Week 2"])
+
+#refer by key
+print(week_con.ix["Week 1"].head())
+print("\n")
+print(week_con.ix[("Week 1", 240)])
+print("\n")
+print(week_con.ix[("Week 1", 240), "Customer ID"])
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID
+0          537        9
+1           97        4
+2          658        1
+3          202        2
+4          155        9
+
+
+Customer ID    945
+Food ID          5
+Name: (Week 1, 240), dtype: int64
+
+
+945
+#+end_example
+
+****** df.append()
+- Works exactly like pd.concat
+- append rows of other df to this df
+
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+
+week_app = week1.append(week2)
+print(week_app.head())
+#+END_SRC
+
+#+RESULTS:
+:    Customer ID  Food ID
+: 0          537        9
+: 1           97        4
+: 2          658        1
+: 3          202        2
+: 4          155        9
+
+****** Inner Joins Intro
+- similar to SQL's inner join
+- Logically means the part exists in all sets
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+
+#inner merge on Customer ID column
+#on would work only both dfs have the same columns
+week_merg = week1.merge(week2, how="inner", on="Customer ID", suffixes = [" - Week 1", " - Week 2"])
+print(week_merg.head())
+#+END_SRC
+
+#+RESULTS:
+:    Customer ID  Food ID - Week 1  Food ID - Week 2
+: 0          537                 9                 5
+: 1          155                 9                 3
+: 2          155                 1                 3
+: 3          503                 5                 8
+: 4          503                 5                 9
+
+****** Inner Join Part2
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+
+week_merg_both = week1.merge(week2, how="inner", on=["Customer ID", "Food ID"])
+print(week_merg_both)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID
+0          304        3
+1          540        3
+2          937       10
+3          233        3
+4           21        4
+5           21        4
+6          922        1
+7          578        5
+8          578        5
+#+end_example
+
+****** Outer Joins
+- Two types of outer joins
+  - 1. data appear in either sets
+  - 2. data appear in either sets BUT doesn't appear in all set
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+
+week_outer=week1.merge(week2, how="outer", on="Customer ID", suffixes=[" - Week 1", " - Week 2"], indicator=True)
+print(week_outer.head())
+print("\n")
+mask = week_outer["_merge"].isin(["left_only","right_only"])
+week_outer_single=week_outer[mask]
+print(week_outer_single.head())
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID - Week 1  Food ID - Week 2     _merge
+0          537               9.0               5.0       both
+1           97               4.0               NaN  left_only
+2          658               1.0               NaN  left_only
+3          202               2.0               NaN  left_only
+4          155               9.0               3.0       both
+
+
+   Customer ID  Food ID - Week 1  Food ID - Week 2     _merge
+1           97               4.0               NaN  left_only
+2          658               1.0               NaN  left_only
+3          202               2.0               NaN  left_only
+6          213               8.0               NaN  left_only
+7          600               1.0               NaN  left_only
+#+end_example
+
+****** Left/Right Joins
+- Similar to Vlookup
+- Left and Right joins are essentially the same
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+
+week_left = week1.merge(foods, how="left", on="Food ID")
+week_right = week1.merge(foods, how="right", on="Food ID")
+week_right_2 = foods.merge(week1, how="left", on="Food ID")
+#merge on Food ID, hence sort based on Food ID
+print(week_left.head())
+print(len(week_left))
+print(week_right.head())
+print(len(week_right))
+print(week_right_2.head())
+print(len(week_right_2))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID   Food Item  Price
+0          537        9       Donut   0.99
+1           97        4  Quesadilla   4.25
+2          658        1       Sushi   3.99
+3          202        2     Burrito   9.99
+4          155        9       Donut   0.99
+250
+   Customer ID  Food ID Food Item  Price
+0          537        9     Donut   0.99
+1          155        9     Donut   0.99
+2          961        9     Donut   0.99
+3          147        9     Donut   0.99
+4          680        9     Donut   0.99
+250
+   Food ID Food Item  Price  Customer ID
+0        1     Sushi   3.99          658
+1        1     Sushi   3.99          600
+2        1     Sushi   3.99          155
+3        1     Sushi   3.99          341
+4        1     Sushi   3.99           20
+250
+#+end_example
+
+****** left_on and right_on parameters
+- Examples above have the same column names
+- left_on and right_on are used when we don't have same column names
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+
+print(week2.head(),"\n")
+print(customers.head(),"\n")
+
+week2_customers = week2.merge(customers, how="left", left_on="Customer ID", right_on="ID")
+#ID column can be dropped
+week2_customers_alt = week2_customers.drop("ID", axis=1)
+print(week2_customers.head(),"\n")
+print(week2_customers_alt.head())
+#Customer ID is the same as ID in customers
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID
+0          688       10
+1          813        7
+2          495       10
+3          189        5
+4          267        3 
+
+   ID First Name Last Name  Gender  Company                     Occupation
+0   1     Joseph   Perkins    Male  Dynazzy  Community Outreach Specialist
+1   2   Jennifer   Alvarez  Female     DabZ        Senior Quality Engineer
+2   3      Roger     Black    Male  Tagfeed              Account Executive
+3   4     Steven     Evans    Male     Fatz               Registered Nurse
+4   5       Judy  Morrison  Female  Demivee                Legal Assistant 
+
+   Customer ID  Food ID   ID First Name   Last Name  Gender     Company  \
+0          688       10  688       Carl  Williamson    Male  Thoughtmix   
+1          813        7  813     Johnny      Walker    Male      Kayveo   
+2          495       10  495    Deborah      Little  Female  Babbleblab   
+3          189        5  189      Roger      Gordon    Male     Skilith   
+4          267        3  267    Matthew        Wood    Male      Agimba   
+
+         Occupation  
+0  Graphic Designer  
+1      Developer II  
+2     VP Accounting  
+3          Operator  
+4  Product Engineer   
+
+   Customer ID  Food ID First Name   Last Name  Gender     Company  \
+0          688       10       Carl  Williamson    Male  Thoughtmix   
+1          813        7     Johnny      Walker    Male      Kayveo   
+2          495       10    Deborah      Little  Female  Babbleblab   
+3          189        5      Roger      Gordon    Male     Skilith   
+4          267        3    Matthew        Wood    Male      Agimba   
+
+         Occupation  
+0  Graphic Designer  
+1      Developer II  
+2     VP Accounting  
+3          Operator  
+4  Product Engineer  
+#+end_example
+
+****** Merge by Index
+- merge not by column names but by indices
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+#now assign indices to customers and foods based on ID columns
+customers = pd.read_csv(file3, index_col="ID")
+foods = pd.read_csv(file4, index_col="Food ID")
+
+week_customer = week1.merge(customers,how="left",left_on="Customer ID", right_index=True)
+week1_customer_food = week_customer.merge(foods, how="left", left_on="Food ID", right_index=True)
+
+print(week1_customer_food.head(),"\n")
+week1_2 = week1.merge(week2, how="left",left_index=True, right_index=True, suffixes=[" - Week 1", " - Week 2"])
+print(week1_2.head())
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID First Name Last Name  Gender    Company  \
+0          537        9     Cheryl   Carroll  Female   Zoombeat   
+1           97        4     Amanda   Watkins  Female        Ozu   
+2          658        1    Patrick      Webb    Male  Browsebug   
+3          202        2      Louis  Campbell    Male  Rhynoodle   
+4          155        9    Carolyn      Diaz  Female   Gigazoom   
+
+                      Occupation   Food Item  Price  
+0               Registered Nurse       Donut   0.99  
+1            Account Coordinator  Quesadilla   4.25  
+2  Community Outreach Specialist       Sushi   3.99  
+3     Account Representative III     Burrito   9.99  
+4     Database Administrator III       Donut   0.99   
+
+   Customer ID - Week 1  Food ID - Week 1  Customer ID - Week 2  \
+0                   537                 9                   688   
+1                    97                 4                   813   
+2                   658                 1                   495   
+3                   202                 2                   189   
+4                   155                 9                   267   
+
+   Food ID - Week 2  
+0                10  
+1                 7  
+2                10  
+3                 5  
+4                 3  
+#+end_example
+
+****** .join() Method
+- Concatenate vertically when two dataframes share the same index
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+file5 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Satisfaction.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+week1_satisfaction = pd.read_csv(file5)
+
+print(week1.head(),"\n")
+print(week1_satisfaction.head(),"\n")
+
+#two methods, merge left
+week1_merge_left = week1.merge(week1_satisfaction, how="left", left_index=True, right_index=True)
+print(week1_merge_left.head(),"\n")
+#join
+week1_join = week1.join(week1_satisfaction).head()
+print(week1_join.head(),"\n")
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID
+0          537        9
+1           97        4
+2          658        1
+3          202        2
+4          155        9 
+
+   Satisfaction Rating
+0                    2
+1                    7
+2                    3
+3                    7
+4                   10 
+
+   Customer ID  Food ID  Satisfaction Rating
+0          537        9                    2
+1           97        4                    7
+2          658        1                    3
+3          202        2                    7
+4          155        9                   10 
+
+   Customer ID  Food ID  Satisfaction Rating
+0          537        9                    2
+1           97        4                    7
+2          658        1                    3
+3          202        2                    7
+4          155        9                   10 
+
+#+end_example
+
+****** pd.merge()
+- a more generic way to merge
+
+#+BEGIN_SRC python :results output
+import pandas as pd
+file1 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Sales.csv"
+file2 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 2 Sales.csv"
+file3 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Customers.csv"
+file4 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Foods.csv"
+file5 = "/home/isaac/Dropbox/PrimerPy/Pandas/Restaurant - Week 1 Satisfaction.csv"
+week1 = pd.read_csv(file1)
+week2 = pd.read_csv(file2)
+customers = pd.read_csv(file3)
+foods = pd.read_csv(file4)
+week1_satisfaction = pd.read_csv(file5)
+week1_customers = pd.merge(left=week1, right=customers, how="left", left_on="Customer ID", right_on="ID")
+week1_customers_alt = week1.merge(customers, how="left", left_on="Customer ID", right_on="ID")
+print(week1_customers.head(),"\n")
+print(week1_customers_alt.head())
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+   Customer ID  Food ID   ID First Name Last Name  Gender    Company  \
+0          537        9  537     Cheryl   Carroll  Female   Zoombeat   
+1           97        4   97     Amanda   Watkins  Female        Ozu   
+2          658        1  658    Patrick      Webb    Male  Browsebug   
+3          202        2  202      Louis  Campbell    Male  Rhynoodle   
+4          155        9  155    Carolyn      Diaz  Female   Gigazoom   
+
+                      Occupation  
+0               Registered Nurse  
+1            Account Coordinator  
+2  Community Outreach Specialist  
+3     Account Representative III  
+4     Database Administrator III   
+
+   Customer ID  Food ID   ID First Name Last Name  Gender    Company  \
+0          537        9  537     Cheryl   Carroll  Female   Zoombeat   
+1           97        4   97     Amanda   Watkins  Female        Ozu   
+2          658        1  658    Patrick      Webb    Male  Browsebug   
+3          202        2  202      Louis  Campbell    Male  Rhynoodle   
+4          155        9  155    Carolyn      Diaz  Female   Gigazoom   
+
+                      Occupation  
+0               Registered Nurse  
+1            Account Coordinator  
+2  Community Outreach Specialist  
+3     Account Representative III  
+4     Database Administrator III  
+#+end_example
+
+***** Working with Dates and Times
+      

@@ -1,0 +1,24 @@
+#+SETUPFILE: /home/isaac/Share/Dropbox/PrimerPy/website/themes/theme-readtheorg.setup
+#+TITLE: PrimerPy: Python and R Fundamentals for Data Science
+#+AUTHOR: Isaac Zhou
+#+OPTIONS: num:nil timestamp:nil
+* [[file:system-setup.org][System Setup]]
+* Python
+** Python Coding
+** Numpy
+** Pandas
+** Bokeh
+** Matplotlib
+** Seaborn
+** Plotly
+* R
+#+BEGIN_SRC R :results output graphics :file test.png :exports both
+library(ggplot2)
+library(ggthemes)
+theme_set(theme_economist())
+pl <- ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point()
+print(pl)
+#+END_SRC
+
+#+RESULTS:
+[[file:test.png]]
